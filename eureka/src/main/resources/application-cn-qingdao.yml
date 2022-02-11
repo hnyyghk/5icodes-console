@@ -1,0 +1,12 @@
+server:
+  port: 8761
+eureka:
+  datacenter: cn-qingdao # 此处设置会改变eureka控制台的显示
+  instance:
+    metadata-map.zone: cn-qingdao
+  client:
+    region: cn
+    availability-zones:
+      cn: cn-qingdao,cn-beijing
+  server:
+    my-url: http://127.0.0.1:8761/eureka/
