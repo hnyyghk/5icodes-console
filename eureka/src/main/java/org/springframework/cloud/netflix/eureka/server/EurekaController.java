@@ -41,6 +41,7 @@ import com.netflix.eureka.resources.StatusResource;
 import com.netflix.eureka.util.StatusInfo;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.netflix.eureka.EurekaClientConfigBean;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -176,7 +177,7 @@ public class EurekaController {
 				String url = info.getStatusPageUrl();
 				InstanceInfo.InstanceStatus status = info.getStatus();
 				String ami = info.getHostName();
-				String zone = info.getMetadata().get("zone");
+				String zone = info.getMetadata().getOrDefault("zone", EurekaClientConfigBean.DEFAULT_ZONE);
 				if (info.getDataCenterInfo().getName() == DataCenterInfo.Name.Amazon) {
 					AmazonInfo dcInfo = (AmazonInfo) info.getDataCenterInfo();
 					ami = dcInfo.get(AmazonInfo.MetaDataKey.amiId);
